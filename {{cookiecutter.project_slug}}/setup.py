@@ -18,6 +18,31 @@ requirements = [
 
 test_requirements = [
     # TODO: put package test requirements here
+    {% if cookiecutter.use_pytest == 'y' -%}
+    'pytest==2.9.2',
+    'pytest-logging',
+    {%- endif %}
+
+    {%- if cookiecutter.use_pylama|lower == 'y' %}
+    'pylama==7.3.3',
+    {%- endif %}
+]
+
+dev_requirements = [
+    'pip==8.1.2',
+    'bumpversion==0.5.3',
+    'wheel==0.29.0',
+    'watchdog==0.8.3',
+    'flake8==2.6.0',
+    'tox==2.3.1',
+    'coverage==4.1',
+    'Sphinx==1.4.8',
+
+    {% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
+    # Requirements for use_pypi_deployment_with_travis script
+    'cryptography==1.7',
+    'PyYAML==3.11',
+    {% endif %}
 ]
 
 {%- set license_classifiers = {
@@ -74,5 +99,6 @@ setup(
     tests_require=test_requirements,
     extras_require={
         'testing': test_requirements,
+        'dev': test_requirements + dev_requirements,
     }
 )
