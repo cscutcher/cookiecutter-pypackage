@@ -1,3 +1,5 @@
+{% set is_open_source = cookiecutter.open_source_license != 'Not open source' -%}
+{% set use_github = cookiecutter.use_github == 'y' -%}
 .. highlight:: shell
 
 ============
@@ -7,7 +9,7 @@ Installation
 
 Stable release
 --------------
-
+{% if is_open_source and use_github -%}
 To install {{ cookiecutter.project_name }}, run this command in your terminal:
 
 .. code-block:: console
@@ -21,11 +23,13 @@ you through the process.
 
 .. _pip: https://pip.pypa.io
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+{% endif -%}
 
 
 From sources
 ------------
 
+{% if is_open_source and use_github -%}
 The sources for {{ cookiecutter.project_name }} can be downloaded from the `Github repo`_.
 
 You can either clone the public repository:
@@ -49,3 +53,4 @@ Once you have a copy of the source, you can install it with:
 
 .. _Github repo: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 .. _tarball: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
+{% endif -%}

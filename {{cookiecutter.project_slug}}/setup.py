@@ -60,7 +60,9 @@ setup(
     long_description=readme + '\n\n' + history,
     author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
     author_email='{{ cookiecutter.email }}',
+    {% if cookiecutter.use_github == 'y' -%}
     url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
+    {% endif -%}
     packages=[
         '{{ cookiecutter.project_slug }}',
     ],
